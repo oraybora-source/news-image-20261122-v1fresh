@@ -1,36 +1,71 @@
-#!/usr/bin/env python3
-"""news-image-20261122 V1-fresh entrypoint (Python 3.13, standard library only).
+"""Copy the finished newspaper front page to the output directory.
 
-Copies the pre-rendered entry image to /output/entry.png. The image was
-drawn in this session by render.py (a build-time script kept in this
-repository for transparency); this program only copies bytes, so two runs
-are byte-identical and it needs no network.
+The artwork itself is produced by render.py. This script is the thin
+delivery step: it finds entry.png next to this file, copies it to the
+output location, and refuses to finish unless the copy is complete.
 
-Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
-    mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
+Output location: the MAKEFUN_OUTPUT_DIR environment variable when set,
+otherwise /output/entry.png.
+
+Usage:
+    python3 main.py
+
+Exit code 0 means the output file exists and is byte-identical to the
+source. Any other exit code means the delivery failed.
 """
+
+import hashlib
 import os
 import shutil
+import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+SOURCE_NAME = "entry.png"
+DEFAULT_OUTPUT_DIR = "/output"
+
+
+def sha256_of(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def main():
-    src = os.path.join(HERE, "entry.png")
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    created = not os.path.isdir(out_dir)
-    os.makedirs(out_dir, exist_ok=True)
-    dst = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(src, dst)
-    # Guard the gate: the copy must be whole, or the run must fail loudly
-    # instead of submitting a truncated file.
-    if os.path.getsize(dst) != os.path.getsize(src):
-        raise RuntimeError("entry.png copy is incomplete")
-    # The output must be readable by every user: file 0644, folder 0755.
-    os.chmod(dst, 0o644)
-    if created:
-        os.chmod(out_dir, 0o755)
+    here = os.path.dirname(os.path.abspath(__file__))
+    source = os.path.join(here, SOURCE_NAME)
+    if not os.path.isfile(source):
+        print("missing source: " + source, file=sys.stderr)
+        return 1
+
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or DEFAULT_OUTPUT_DIR
+    destination = os.path.join(out_dir, SOURCE_NAME)
+    try:
+        os.makedirs(out_dir, exist_ok=True)
+    except OSError as exc:
+        print("cannot create output dir: " + str(exc), file=sys.stderr)
+        return 1
+
+    try:
+        shutil.copyfile(source, destination)
+    except OSError as exc:
+        print("copy failed: " + str(exc), file=sys.stderr)
+        return 1
+
+    source_size = os.path.getsize(source)
+    dest_size = os.path.getsize(destination)
+    if source_size != dest_size:
+        print("size mismatch: source %d bytes, copy %d bytes"
+              % (source_size, dest_size), file=sys.stderr)
+        return 1
+    if sha256_of(source) != sha256_of(destination):
+        print("checksum mismatch after copy", file=sys.stderr)
+        return 1
+
+    print("delivered %s (%d bytes, sha256 %s)"
+          % (destination, dest_size, sha256_of(destination)))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
