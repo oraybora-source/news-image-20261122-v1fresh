@@ -13,10 +13,10 @@ Layout (NEW, unlike rank 1-3 and unlike V1):
   footer: region strip + DATE CHECK + NOT SHOWN + HOW WE CHECKED.
 No map, no timeline strip, no big-number strip (all three were in V1
 and in rank 1-3). 41 verified stories, from notes/sumber-V1fresh.md.
-Region counts counted from the per-story Wil column of that file:
-EU 9, ME 9, AM 8, AS 5, AF 5, OC 2, WORLD 3 (its summary line says
-EU 10 / WORLD 2; the per-row table is the primary data, so the strip
-prints the counted 9 / 3 and the discrepancy is noted in STORIES.md).
+Region counts counted from the per-story Wil column of that file
+(putaran 1: EU 9, ME 9, AM 9, AS 5, AF 5, OC 2, WORLD 2 — swaps #37
+WORLD->AS and #41 AS->AM; the old summary line EU 9 / WORLD 3 is
+superseded, see STORIES.md).
 """
 import os
 import sys
@@ -152,7 +152,7 @@ GRID = [
     {"n": 6, "region": "EU", "place": "DYMER",
      "title": "DRONE HITS FLATS NEAR KYIV", "value": "3 DEAD, 14 TRAPPED",
      "num": "14", "field": "CONFLICT", "status": "CONFIRMED", "source": "AP",
-     "summary": "A Russian drone strikes a five-storey block.", "art": "dymer"},
+     "summary": "One of 186 drones; strikes a five-storey block.", "art": "dymer"},
     {"n": 11, "region": "EU", "place": "LUBLIN",
      "title": "MISSILES IN POLAND WERE RUSSIAN", "value": "3 KH-101",
      "num": "3", "field": "SECURITY", "status": "CONFIRMED",
@@ -182,7 +182,7 @@ GRID = [
     {"n": 14, "region": "AS", "place": "CIKANDE",
      "title": "FACTORY FIRE, 36 MISSING", "value": "36 MISSING", "num": "36",
      "field": "DISASTER", "status": "CONFIRMED", "source": "AP / REUTERS",
-     "summary": "Fire at a factory; 36 people missing.", "art": "cikande"},
+     "summary": "Fire at a factory; 3 dead, 36 missing.", "art": "cikande"},
     {"n": 12, "region": "WORLD", "place": "MERCURY",
      "title": "BEPICOLOMBO REACHES MERCURY", "value": "ORBIT", "num": "7 YRS",
      "field": "SPACE", "status": "CONFIRMED", "source": "ESA / REUTERS",
@@ -198,7 +198,7 @@ BRIEFS = [
      "fact": "Drone attack kills 4", "source": "AFP", "status": "CONFIRMED"},
     {"n": 17, "region": "AM", "city": "KANSAS CITY",
      "fact": "Chiefs beat Cardinals 34–7", "source": "SPORTRADAR", "status": "CONFIRMED"},
-    {"n": 18, "region": "AM", "city": "ASUNCIÓN",
+    {"n": 18, "region": "AM", "city": "BARRANQUILLA",
      "fact": "Boca beat Atlético Mineiro 2–0, Copa Sudamericana",
      "source": "LIVESCORE", "status": "CONFIRMED"},
     {"n": 19, "region": "AS", "city": "LAHORE",
@@ -212,7 +212,7 @@ BRIEFS = [
     {"n": 22, "region": "ME", "city": "GAZA",
      "fact": "IDF strike leaves 1 critically hurt", "source": "WIRES",
      "status": "CONFIRMED"},
-    {"n": 23, "region": "ME", "city": "BEIRUT",
+    {"n": 23, "region": "ME", "city": "QAA",
      "fact": "Lebanon arrests 3, seizes 264 kg of explosives", "source": "AFP",
      "status": "CONFIRMED"},
     {"n": 24, "region": "EU", "city": "WARSAW",
@@ -227,9 +227,9 @@ BRIEFS = [
     {"n": 27, "region": "EU", "city": "VILLARREAL",
      "fact": "Barcelona come back from 2–0 down, win 3–2", "source": "SPORTRADAR",
      "status": "CONFIRMED"},
-    {"n": 28, "region": "OC", "city": "SYDNEY",
-     "fact": "Australian dollar rebounds against NZ dollar", "source": "BLOOMBERG",
-     "status": "CONFIRMED"},
+    {"n": 28, "region": "OC", "city": "MELBOURNE",
+     "fact": "Olympians reunite at MCG, 70 years after 1956 Games opened",
+     "source": "ABC", "status": "CONFIRMED"},
     {"n": 29, "region": "ME", "city": "RABIGH",
      "fact": "Houthis claim direct hit on Saudi refinery", "source": "HOUTHIS",
      "status": "REPORTED"},
@@ -239,36 +239,36 @@ BRIEFS = [
     {"n": 31, "region": "AM", "city": "SAN ANTONIO",
      "fact": "Wembanyama: 50 points, 19 rebounds, Spurs win 114–91",
      "source": "AP", "status": "CONFIRMED"},
-    {"n": 32, "region": "AM", "city": "KANSAS CITY",
+    {"n": 32, "region": "AM", "city": "WASHINGTON",
      "fact": "Current win first NWSL title, 2–1", "source": "AP",
      "status": "CONFIRMED"},
     {"n": 33, "region": "EU", "city": "KYIV",
      "fact": "Zelensky: Russia launched 2,700 drones in a week", "source": "AP",
      "status": "CONFIRMED"},
-    {"n": 34, "region": "ME", "city": "JERUSALEM",
+    {"n": 34, "region": "ME", "city": "HERZLIYA",
      "fact": "Eisenkot–Likud unity talks end after 4 hours, no deal",
      "source": "AP", "status": "CONFIRMED"},
-    {"n": 35, "region": "EU", "city": "VILNIUS",
+    {"n": 35, "region": "EU", "city": "RŪDNINKAI",
      "fact": "Germany tests kamikaze drones, AI targeting near Belarus",
      "source": "AP", "status": "CONFIRMED"},
-    {"n": 36, "region": "AF", "city": "NAIROBI",
+    {"n": 36, "region": "AF", "city": "OYO",
      "fact": "Kenya and DR Congo restore full diplomatic ties", "source": "AP",
      "status": "CONFIRMED"},
-    {"n": 37, "region": "WORLD", "city": "SPACE",
-     "fact": "Earth has a temporary mini-moon: asteroid 2026 QQ8, 2 m wide",
-     "source": "WIRES", "status": "CONFIRMED"},
+    {"n": 37, "region": "AS", "city": "HONG KONG",
+     "fact": "856 candidates for 723 seats; turnout 98.79%",
+     "source": "INFO.GOV.HK", "status": "CONFIRMED"},
     {"n": 38, "region": "AF", "city": "JOHANNESBURG",
      "fact": "ANC–ActionSA agree: Mashaba for mayor",
      "source": "WIRES", "status": "REPORTED"},
     {"n": 39, "region": "ME", "city": "TEHRAN",
-     "fact": "Iran shows dual missile launcher, new missile city",
-     "source": "WIRES", "status": "REPORTED"},
+     "fact": "Iran begins electricity rationing; cuts up to 2 hours a day",
+     "source": "RFE/RL", "status": "CONFIRMED"},
     {"n": 40, "region": "ME", "city": "BEIRUT",
      "fact": "Aoun: Israel must withdraw; all weapons under the state",
      "source": "WIRES", "status": "REPORTED"},
-    {"n": 41, "region": "AS", "city": "NEW DELHI",
-     "fact": "Nepal's prime minister visits Delhi", "source": "MEA",
-     "status": "CONFIRMED"},
+    {"n": 41, "region": "AM", "city": "BRASÍLIA",
+     "fact": "Bolsonaro in intensive care with bowel obstruction",
+     "source": "THE TIMES", "status": "CONFIRMED"},
 ]
 
 PANEL = [("258", "House seats, Democrats"),
@@ -276,13 +276,14 @@ PANEL = [("258", "House seats, Democrats"),
          ("720/9", "India's record Test total"),
          ("50", "Wembanyama points, Spurs")]
 
-REGION_COUNTS = {"EU": 9, "ME": 9, "AM": 8, "AS": 5, "AF": 5, "OC": 2,
-                 "WORLD": 3}
+REGION_COUNTS = {"EU": 9, "ME": 9, "AM": 9, "AS": 5, "AF": 5, "OC": 2,
+                 "WORLD": 2}
 
 DATECHECK = ("DATE CHECK — Nigeria boat capsized Friday; toll of 24 confirmed "
              "Sunday. Brazil storm was Friday; 5 dead is Sunday's update. "
-             "Poland missiles fell Friday; identified Sunday. F1, NBA and "
-             "NWSL finals were Saturday night in the US — Sunday in Jakarta.")
+             "Poland missiles fell Friday; identified Sunday. F1, NBA, NWSL "
+             "finals: Sat. night in US. Bahrain strike was Saturday; 2 hurt "
+             "announced Sunday.")
 NOTSHOWN = ("NOT SHOWN: ICJ Rohingya ruling (19 Nov), UK–EU reset (20 Nov), "
             "GTA VI $3.79bn (20 Nov) — not 22 November news.")
 HOWCHECKED = ("HOW WE CHECKED — Every story dated 22 Nov 2026 from primary "
@@ -405,16 +406,18 @@ def paint_marquez(draw, box, st):
         lx = x0 + 6 + i * (w - 12) // 9
         draw.line([lx, y0 + int(h * 0.68), lx + 10, y0 + int(h * 0.68)],
                   fill=WHITE, width=2)
+    # Putaran 1: bike enlarged (wheels r 9 -> 12, wheelbase 40 -> 52)
+    # so the bike reads at card size; rider still never drawn.
     bx, by = x0 + int(w * 0.52), y0 + int(h * 0.66)
-    for wx in (bx - 20, bx + 20):
-        draw.ellipse([wx - 9, by - 9, wx + 9, by + 9], fill=(25, 25, 25),
+    for wx in (bx - 26, bx + 26):
+        draw.ellipse([wx - 12, by - 12, wx + 12, by + 12], fill=(25, 25, 25),
                      outline=WHITE, width=3)
-    draw.line([bx - 20, by, bx + 20, by], fill=(25, 25, 25), width=4)
-    draw.line([bx - 2, by, bx + 8, by - 15], fill=(25, 25, 25), width=4)
-    draw.line([bx + 8, by - 15, bx + 17, by], fill=(25, 25, 25), width=4)
-    draw.polygon([(bx + 2, by - 19), (bx + 16, by - 19), (bx + 11, by - 8),
-                  (bx + 4, by - 8)], fill=(200, 40, 40))
-    draw.line([bx - 20, by - 2, bx - 8, by - 12], fill=(200, 40, 40), width=3)
+    draw.line([bx - 26, by, bx + 26, by], fill=(25, 25, 25), width=5)
+    draw.line([bx - 2, by, bx + 10, by - 18], fill=(25, 25, 25), width=5)
+    draw.line([bx + 10, by - 18, bx + 22, by], fill=(25, 25, 25), width=5)
+    draw.polygon([(bx + 2, by - 23), (bx + 20, by - 23), (bx + 14, by - 9),
+                  (bx + 4, by - 9)], fill=(200, 40, 40))
+    draw.line([bx - 26, by - 2, bx - 10, by - 14], fill=(200, 40, 40), width=3)
     fx = x1 - 36
     draw.line([fx, y0 + 4, fx, y0 + 36], fill=(80, 70, 60), width=2)
     for r in range(3):
@@ -449,6 +452,23 @@ def paint_bahrain(draw, box, st):
     for r in (10, 16):
         draw.arc([dx - r, dy - r, dx + r, dy + r], start=180, end=270,
                  fill=(255, 210, 90), width=2)
+    # Putaran 1: two missile trails in the sky + an impact burst above
+    # the roof, so the strike reads as an attack, not just a night city.
+    import math
+    for (mx0, my0, mx1, my1) in ((0.06, 0.10, 0.26, 0.30),
+                                 (0.42, 0.06, 0.60, 0.26)):
+        draw.line([x0 + w * mx0, y0 + h * my0, x0 + w * mx1, y0 + h * my1],
+                  fill=(255, 180, 90), width=2)
+        draw.polygon([(x0 + w * mx1, y0 + h * my1),
+                      (x0 + w * mx1 - 6, y0 + h * my1 - 2),
+                      (x0 + w * mx1 - 2, y0 + h * my1 + 5)],
+                     fill=(255, 140, 40))
+    ex2, ey2 = bx + bw // 2, by - 8
+    for ang in range(0, 360, 45):
+        x2 = ex2 + int(7 * math.cos(math.radians(ang)))
+        y2 = ey2 + int(7 * math.sin(math.radians(ang)))
+        draw.line([ex2, ey2, x2, y2], fill=(255, 160, 60), width=2)
+    draw.ellipse([ex2 - 3, ey2 - 3, ex2 + 3, ey2 + 3], fill=(255, 220, 90))
     fx, fy = bx + bw - 8, by - 4
     draw.polygon([(fx, fy), (fx - 6, fy + 10), (fx + 6, fy + 10)],
                  fill=(255, 140, 40))
